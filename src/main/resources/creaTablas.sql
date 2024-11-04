@@ -10,7 +10,7 @@ create user 'usuario_reportes'@'%' identified by 'Usuar1o_reportes.';
 
 /*Se asignan los prvilegios sobr ela base de datos TechShop al usuario creado */
 grant all privileges on techshop.* to 'usuario_prueba'@'%';
-grant select privileges on techshop.* to 'usuario_prueba'@'%';
+grant select privileges on techshop.* to 'usuario_reportes'@'%';
 flush privileges;
 
 use techshop;

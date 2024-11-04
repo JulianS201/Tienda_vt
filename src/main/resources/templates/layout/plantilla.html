@@ -3,12 +3,13 @@
     xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <title>TechShop</title>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8"/><!-- permite usar íconos -->  <!-- se adaptan a diferentes tamaños de pantallas -->
     
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" <!-- se adaptan a diferentes tamaños de pantallas -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" 
           rel="stylesheet" />
-  <link th:href="@{/webjars/font-awesome/css/all.css}"  <!-- permite usar íconos -->
+  <link th:href="@{/webjars/font-awesome/css/all.css}"  
         rel="stylesheet" />
+  <script src="/js/rutinas.js" type="text/javascript"></script>
    <link href="css/estilos.css" rel="stylesheet" type="text/css" /> <!-- Hoja de estilos css (diseño de la pagina web) -->
   <script th:src="@{/webjars/jquery/jquery.min.js}"></script>  <!-- Hace mas sencillo trabajar con JavaSrictp -->
   <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script> <!-- ayuda a posicionar elementos emergentes, como menús y mensajes -->
@@ -19,10 +20,10 @@
     
 </head>
 <body>
-<header th:fragment="header" class="header fixed-top">
+<header th:fragment="header" class="header">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container">
-            <!-- Título de la aplicación -->
+        <div class="container"> <!-- Título de la aplicación -->
+            
             <a class="navbar-brand" th:href="@{/}">[[#{aplicacion.titulo}]]</a>
             <button class="navbar-toggler"
         data-bs-toggle="collapse"
@@ -31,22 +32,22 @@
 </button>
 <div id="navbarCollapse"
      class="collapse navbar-collapse justify-content-between">
-    <ul class="navbar-nav">
-        <!-- Enlace a la lista -->
+    <ul class="navbar-nav">   <!-- Enlace a la lista -->
+     
         <li class="nav-item px=2"><a class="nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categorias}]]</a></li>
                 
       <li class="nav-item px=2"><a class="nav-link" th:href="@{/producto/listado}">[[#{plantilla.productos}]]</a></li>
       
       
-      <!-- Menu desplegable -->
-  <li class="nav-item dropdown">
+
+  <li class="nav-item dropdown">      <!-- Menu desplegable -->
   <a class="nav-link dropdown-toggle"
      data-bs-toggle="dropdown"
      href="#"
      role="button"
      aria-expanded="false">[[#{plantilla.extras}]]</a>
-  <ul class="dropdown-menu dropdown-menu-dark">
-       <!-- Subopciones -->
+  <ul class="dropdown-menu dropdown-menu-dark">       <!-- Subopciones -->
+
  <li><a class="dropdown-item" th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
  <li><a class="dropdown-item" th:href="@{/pruebas/listado}">[[#{plantilla.consultas}]]</a></li>
  <li><a class="dropdown-item" th:href="@{/reportes/listado}">[[#{plantilla.reportes}]]</a></li>
@@ -56,8 +57,8 @@
     </ul>
 </li>   
     </ul>
-     <!-- Cambios de idioma -->
-   <ul class="navbar-nav">
+
+   <ul class="navbar-nav">     <!-- Cambios de idioma -->
   <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle"
      data-bs-toggle="dropdown"
@@ -76,8 +77,8 @@
         </div>
     </nav>
     </header>
-     <!-- Codigo del footert, ademas llama un citado de la lista de propiedades "es" -->
-     <footer th:fragment="footer" class="p-2 mt-5 bg-info text-white text-center fixed-bottom">
+     
+     <footer th:fragment="footer" class="p-2 mt-5 bg-info text-white text-center fixed-bottom"> <!-- Codigo del footert, ademas llama un citado de la lista de propiedades "es" -->
         COPY: [[#{plantilla.derechos}]]
     </footer>
 </body>
