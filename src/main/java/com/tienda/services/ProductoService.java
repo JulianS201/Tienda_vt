@@ -19,4 +19,12 @@ public interface ProductoService {
     // Se elimina el producto que tiene el id pasado por parametro
     public void delete(Producto producto);
 
+     //Consulta Ampliada, método que recupera los productos que están en un rango de precios
+public List<Producto> consultaAmpliada(double precioInf, double precioSup);
+
+public List<Producto> consultaJPQL(double precioInf,double precioSup);
+
+public List<Producto> consultaSQL(double precioInf, double precioSup);
+    
+    
 }

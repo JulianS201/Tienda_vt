@@ -1,6 +1,5 @@
 package com.tienda.services.impl;
 
-
 import com.tienda.dao.ProductoDao;
 import com.tienda.domain.Producto;
 import com.tienda.services.ProductoService;
@@ -16,18 +15,19 @@ public class ProductoServiceImpl implements ProductoService {
     private ProductoDao productoDao;
 
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Producto> getProductos(boolean activos) {
         var lista = productoDao.findAll();
 
         if (activos) {
-            // Se eliminan los inactivos...
-            //lista.removeIf(c -> !c.isActivo());
+            // Se eliminan los inactivos
+            // lista.removeIf(c -> !c.isActivo());
         }
 
         return lista;
     }
-        @Override
+
+    @Override
     @Transactional(readOnly = true)
     public Producto getProducto(Producto producto) {
         return productoDao.findById(producto.getIdProducto()).orElse(null);
@@ -43,5 +43,25 @@ public class ProductoServiceImpl implements ProductoService {
     @Transactional
     public void delete(Producto producto) {
         productoDao.delete(producto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> consultaAmpliada(double precioInf, double precioSup) {
+        return productoDao.findByPrecioBetweenOrderByPrecioAsc(precioInf, precioSup);
+    }
+
+    // Consulta JPQL, método que recupera los productos que están en un rango de precios
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> consultaJPQL(double precioInf, double precioSup) {
+        return productoDao.consultaJPQL(precioInf, precioSup);
+    }
+
+    // Consulta SQL, método que recupera los productos que están en un rango de precios
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> consultaSQL(double precioInf, double precioSup) {
+        return productoDao.consultaSQL(precioInf, precioSup);
     }
 }
