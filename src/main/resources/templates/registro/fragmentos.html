@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- Mi primera pagina Html Dinamica -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <section th:fragment="nuevo">
+            <div class="row p-2 justify-content-center">
+                <div class="col-md-3">
+                    <a href="/login" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                    </a>
+                </div>
+            </div>
+            <div class="row p-2 justify-content-center">
+                <div class="col-md-3">
+                    <form method="POST"
+                          th:action="@{/registro/crear}" 
+                          th:object="${usuario}"
+                          class="was-validated">
+                        <div class="card">
+                            <div class="card-header bg-primary text-center text-white">
+                                <h4>[[#{usuario.agregar}]]</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-body">
+                                    <div class="form-group mb-3">
+                                        <label>[[#{usuario.username}]]</label>
+                                        <input type="text" class="form-control"
+                                               name="username" th:field="*{username}"
+                                               maxlength="20"
+                                               required="true">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group mb-3">
+                                        <label>[[#{usuario.nombre}]]</label>
+                                        <input type="text" class="form-control"
+                                               name="nombre" th:field="*{nombre}"
+                                               maxlength="20"
+                                               required="true">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group mb-3">
+                                        <label>[[#{usuario.apellidos}]]</label>
+                                        <input type="text" class="form-control"
+                                               name="apellidos" th:field="*{apellidos}"
+                                               maxlength="30"
+                                               required="true">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group mb-3">
+                                        <label>[[#{usuario.correo}]]</label>
+                                        <input type="email" class="form-control"
+                                               name="correo" th:field="*{correo}"
+                                               maxlength="45"
+                                               required="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-success">
+                                    <i class=" fas fa-envelope"></i> [[#{usuario.activacion}]]
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="salida">
+            <div class="row p-2 justify-content-center">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header bg-primary text-center text-white">
+                            <h4>[[${titulo}]]</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>[[${mensaje}]]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+

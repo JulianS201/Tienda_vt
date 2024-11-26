@@ -1,85 +1,115 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
-    <title>TechShop</title>
-    <meta charset="UTF-8"/><!-- permite usar íconos -->  <!-- se adaptan a diferentes tamaños de pantallas -->
-    
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" 
-          rel="stylesheet" />
-  <link th:href="@{/webjars/font-awesome/css/all.css}"  
-        rel="stylesheet" />
-  <script src="/js/rutinas.js" type="text/javascript"></script>
-   <link href="css/estilos.css" rel="stylesheet" type="text/css" /> <!-- Hoja de estilos css (diseño de la pagina web) -->
-  <script th:src="@{/webjars/jquery/jquery.min.js}"></script>  <!-- Hace mas sencillo trabajar con JavaSrictp -->
-  <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script> <!-- ayuda a posicionar elementos emergentes, como menús y mensajes -->
-  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>   <!-- Hace que botones o menus funcionen correctamente -->
-    
-    
-    
-    
-</head>
-<body>
-<header th:fragment="header" class="header">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container"> <!-- Título de la aplicación -->
-            
-            <a class="navbar-brand" th:href="@{/}">[[#{aplicacion.titulo}]]</a>
-            <button class="navbar-toggler"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse">
-    <span class="navbar-toggler-icon"></span>
-</button>
-<div id="navbarCollapse"
-     class="collapse navbar-collapse justify-content-between">
-    <ul class="navbar-nav">   <!-- Enlace a la lista -->
-     
-        <li class="nav-item px=2"><a class="nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categorias}]]</a></li>
-                
-      <li class="nav-item px=2"><a class="nav-link" th:href="@{/producto/listado}">[[#{plantilla.productos}]]</a></li>
-      
-      
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <title>TechShop</title>
+        <meta charset="UTF-8"/><!-- permite usar íconos -->  <!-- se adaptan a diferentes tamaños de pantallas -->
 
-  <li class="nav-item dropdown">      <!-- Menu desplegable -->
-  <a class="nav-link dropdown-toggle"
-     data-bs-toggle="dropdown"
-     href="#"
-     role="button"
-     aria-expanded="false">[[#{plantilla.extras}]]</a>
-  <ul class="dropdown-menu dropdown-menu-dark">       <!-- Subopciones -->
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" 
+              rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}"  
+              rel="stylesheet" />
+        <script src="/js/rutinas.js" type="text/javascript"></script>
+        <link href="css/estilos.css" rel="stylesheet" type="text/css" /> <!-- Hoja de estilos css (diseño de la pagina web) -->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>  <!-- Hace mas sencillo trabajar con JavaSrictp -->
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script> <!-- ayuda a posicionar elementos emergentes, como menús y mensajes -->
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>   <!-- Hace que botones o menus funcionen correctamente -->
 
- <li><a class="dropdown-item" th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
- <li><a class="dropdown-item" th:href="@{/pruebas/listado2}">[[#{plantilla.consultas}]]</a></li>
- <li><a class="dropdown-item" th:href="@{/reportes/listado}">[[#{plantilla.reportes}]]</a></li>
-      
-      
-      
-    </ul>
-</li>   
-    </ul>
 
-   <ul class="navbar-nav">     <!-- Cambios de idioma -->
-  <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle"
-     data-bs-toggle="dropdown"
-     href="#"
-     role="button"
-     aria-expanded="false">[[#{plantilla.idioma}]]</a>
-  <ul class="dropdown-menu dropdown-menu-dark">
- <li><a class="dropdown-item" th:href="@{/(lang=es)}">Español</a></li>
- <li><a class="dropdown-item" th:href="@{/(lang=en)}">Ingles</a></li>
-   <li><a class="dropdown-item" th:href="@{/(lang=fr)}">Frances</a></li>  
-     <li><a class="dropdown-item" th:href="@{/(lang=pt)}">Potuges</a></li>
-      </ul>
-</li> 
-   </ul>
-    <div>
-        </div>
-    </nav>
-    </header>
-     
-     <footer th:fragment="footer" class="p-2 mt-5 bg-info text-white text-center fixed-bottom"> <!-- Codigo del footert, ademas llama un citado de la lista de propiedades "es" -->
-        COPY: [[#{plantilla.derechos}]]
-    </footer>
-</body>
-</html>
+
+
+    </head>
+    <body>
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <div class="container"> <!-- Título de la aplicación -->
+
+                    <a class="navbar-brand" th:href="@{/}">[[#{aplicacion.titulo}]]</a>
+                    <button class="navbar-toggler"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="navbarCollapse"
+                         class="collapse navbar-collapse justify-content-between">
+                        <ul sec:authorize='hasRole("ROLE_VENDEDOR")'
+                            <ul class="navbar-nav">   <!-- Enlace a la lista -->
+
+                                <li class="nav-item px=2"><a class="nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categorias}]]</a></li>
+
+                                <li class="nav-item px=2"><a class="nav-link" th:href="@{/producto/listado}">[[#{plantilla.productos}]]</a></li>
+
+
+
+                                <li class="nav-item dropdown">      <!-- Menu desplegable -->
+                                    <a class="nav-link dropdown-toggle"
+                                       data-bs-toggle="dropdown"
+                                       href="#"
+                                       role="button"
+                                       aria-expanded="false">[[#{plantilla.extras}]]</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark">       <!-- Subopciones -->
+
+                                        <li><a class="dropdown-item" th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/pruebas/listado2}">[[#{plantilla.consultas}]]</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/reportes/listado}">[[#{plantilla.reportes}]]</a></li>
+
+
+
+                                    </ul>
+                                </li>   
+                            </ul>
+
+                            <ul class="navbar-nav">     <!-- Cambios de idioma -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle"
+                                       data-bs-toggle="dropdown"
+                                       href="#"
+                                       role="button"
+                                       aria-expanded="false">[[#{plantilla.idioma}]]</a>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item" th:href="@{/(lang=es)}">Español</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/(lang=en)}">Ingles</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/(lang=fr)}">Frances</a></li>  
+                                        <li><a class="dropdown-item" th:href="@{/(lang=pt)}">Potuges</a></li>
+                                    </ul>
+                                </li> 
+                            </ul>
+                            <div id="resultBlock">
+                            </div>
+                            <ul class="navbar-nav"
+                                sec:authorize='!isAuthenticated()'>
+                                <li class='nav-item'>
+                                    <a class='nav-menu-link nav-link'
+                                       th:href='@{/login}'>
+                                        <i class="fas fa-right-to-bracket"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav"
+                                sec:authorize='isAuthenticated()'>
+                                <li class='nav-item text-white my-auto'>
+                                    <img th:src="@{${session.imagenUsuario}}"                                      
+                                         height="40" 
+                                         class="rounded-circle"
+                                         alt=""/>
+                                    <span sec:authentication='name'>Jhon</span>
+                                </li>
+                                <li class='nav-item text-white my-auto'>
+                                    <form method="post" 
+                                          th:action='@{/logout}'>
+                                        <button class='btn btn-dark'>
+                                            <i class="fas fa-right-from-bracket"></i> 
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                            <div>
+                            </div>
+                            </nav>
+                            </header>
+
+                            <footer th:fragment="footer" class="p-2 mt-5 bg-info text-white text-center fixed-bottom"> <!-- Codigo del footert, ademas llama un citado de la lista de propiedades "es" -->
+                                COPY: [[#{plantilla.derechos}]]
+                            </footer>
+                            </body>
+                            </html>

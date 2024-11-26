@@ -33,7 +33,6 @@
         <!-- 3.Listado de tarjetas de productos -->
         <section th:fragment="tarjetas">
             <div class="container">
-                <!-- Condición para mostrar productos si no está vacío -->
                 <div th:if="${productos != null and !productos.empty}">
                     <div class="row row-cols-4 p-2">
                         <div th:each="p : ${productos}" class="col">
@@ -59,8 +58,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Mensaje para lista vacía -->
                 <div th:if="${productos == null or productos.empty}">
                     <h4 th:text="#{lista.vacia}">No hay productos disponibles</h4>
                 </div>
@@ -71,7 +68,7 @@
         <section th:fragment="consultas">
             <div class="row row-cols-3 p-2">
                 <div class="card p-2">
-                    <form method="post" 
+                    <form method="get" 
                           action="/pruebas/consultasAmpliadas">
                         <div class="card-header bg-primary text-white text-center">
                             <h4>[[#{pruebas.ampliadas}]]</h4>
@@ -105,7 +102,7 @@
                 </div>
 
                 <div class="card p-2">
-                    <form method="post" 
+                    <form method="get" 
                           action="/pruebas/consultasJPQL">
                         <div class="card-header bg-primary text-white text-center">
                             <h4>[[#{pruebas.ampliadas}]]</h4>
@@ -141,7 +138,7 @@
 
 
                 <div class="card p-2">
-                    <form method="post" 
+                    <form method="get" 
                           action="/pruebas/consultasSQL">
                         <div class="card-header bg-primary text-white text-center">
                             <h4>[[#{pruebas.nativo}]]</h4>
