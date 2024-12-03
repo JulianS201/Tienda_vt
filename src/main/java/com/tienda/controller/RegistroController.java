@@ -5,11 +5,17 @@
 package com.tienda.controller;
 
 import com.tienda.domain.Usuario;
+import com.tienda.services.RegistroService;
+import jakarta.mail.MessagingException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/registro")
@@ -21,12 +27,36 @@ public class RegistroController {
         return "/registro/nuevo";
     }
 
-    @PostMapping("/registro/crear")
-    public String crear(Model model, Usuario usuario) {
+    @Autowired
+    private RegistroService registroService;
 
-        model.addAttribute("titulo", usuario.getUsername());
-        model.addAttribute("mensaje", "Revise su cuenta de correo, se le envio un correo para activar el correo");
-        
+    @PostMapping("/crear")
+    public String crear(Model model, Usuario usuario) throws MessagingException {
+
+        model = registroService.crear(model, usuario);
         return "/registro/salida";
+    }
+
+    @GetMapping("/activacion/{username}/{password}")
+    public String activacion(Model model,
+            @PathVariable("username") String username,
+            @PathVariable("password") String password) {
+        model = registroService.activar(model, username, password);
+
+        if (model.containsAttribute("usuario")) {
+            // Encontró el usuario y lo "inyectó" en el model...
+            return "/registro/activa";
+        } else {
+            // No encontró el usuario... error de activación
+            return "/registro/salida";
+        }
+
+    }
+
+    @PostMapping("/habilitar")
+    public String habilitar(Model model, Usuario usuario,
+            @RequestParam("imagenFile") MultipartFile imagenFile) {
+        registroService.habilitar(usuario, imagenFile);
+        return "redirect:/";
     }
 }
