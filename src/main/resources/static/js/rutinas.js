@@ -15,11 +15,15 @@ function readURL(input) {
 
 /* La siguiente función se utiliza para activar la cantidad de elementos seleccionados
  * En el carrito de compras utilizando un llamado "ajax" */
-function addCard(formulario) {
-    var valor = formulario.elements[0].value;
-    var url = '/carrito/agregar';
-    url = url + '/' + valor;
-    $("#resultsBlock").load(url);
+function addCart(formulario) {
+    var idProducto = formulario.elements[0].value;
+    var existencias = formulario.elements[1].value;
+    var ruta = '/carrito/agregar/' + idProducto;
+    if (existencias > 0) {
+        $("#resultBlock").load(ruta);
+    } else { //Si no hay exietencias, se le dice al suaurio
+        alert("No hay existencias...");
+    }
 }
 
 
